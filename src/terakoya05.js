@@ -1,3 +1,5 @@
+//アロー関数を使う
+//引数を二つ以上受けとる
 const getArrow = ({ name, drink, food }) => {
   return (
     name +
@@ -12,6 +14,7 @@ const getArrow = ({ name, drink, food }) => {
   );
 };
 
+//使う
 const name = "庵野";
 const drink = "ビール";
 const food = "ミックスグリル";
