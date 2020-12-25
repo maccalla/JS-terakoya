@@ -72,3 +72,63 @@ describe("type", () => {
     expect(res).toEqual("string");
   });
 });
+
+// 変数に型が string, number, array, object, function になる値を入れる
+// その型を typechecker でチェックして、期待する型になるようにテストを書く
+
+describe("typeAllCheck", () => {
+  it("string", () => {
+    const str = "hello world";
+    const res = getType(str);
+    expect(res).toEqual("string");
+  });
+
+  it("number", () => {
+    const num = 12;
+    const res = getType(num);
+    expect(res).toEqual("number");
+  });
+
+  it("array", () => {
+    const arr = [1, 2, 3];
+    const res = getType(arr);
+    expect(res).toEqual("array");
+  });
+
+  it("object", () => {
+    const obj = { name: "ko-ji", age: 12 };
+    const res = getType(obj);
+    expect(res).toEqual("object");
+  });
+
+  it("function", () => {
+    const func = () => "hello world";
+    const res = getType(func);
+    expect(res).toEqual("function");
+  });
+});
+
+// テスト駆動でやろう
+// 配列をなんでもいいので作る
+// 作られた配列の型を getType で確認
+// さらに、配列の n 番目の中身と、その型をテストで確認
+
+describe("type", () => {
+  //配列
+  const arr = [1, 2, 3];
+
+  test("配列の型", () => {
+    const res = getType(arr);
+    expect(res).toEqual("array");
+  });
+
+  test("配列の最初", () => {
+    const res = arr[0];
+    expect(res).toEqual(1);
+  });
+
+  test("配列の0番目の型", () => {
+    const res = arr[0];
+    expect(res).toEqual("number");
+  });
+});
