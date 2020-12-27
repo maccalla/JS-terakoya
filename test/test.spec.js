@@ -129,6 +129,112 @@ describe("type", () => {
 
   test("配列の0番目の型", () => {
     const res = arr[0];
-    expect(res).toEqual("number");
+    expect(getType(res)).toEqual("number");
+  });
+});
+
+// オブジェクトを書く
+// オブジェクトの用語を思い出す！
+// テストを書いて、オブジェクトのプロパティにアクセスし、その値をテストしよう！
+
+const obj = {
+  name: "ko-ji",
+  age: 28,
+  pocket: ["key", "bread", "candy"]
+};
+
+describe("オブジェクト", () => {
+  test("型チェック", () => {
+    expect(getType(obj)).toEqual("object");
+  });
+
+  test("配列チェック", () => {
+    const res = obj["pocket"][0];
+    expect(res).toEqual("key");
+  });
+
+  test("配列型チェック", () => {
+    const res = obj["pocket"];
+    expect(getType(res)).toEqual("array");
+  });
+});
+
+// オブジェクトを複数作る
+// そのオブジェクトを配列にしまう
+// テストを書いて、配列の各要素、それからその要素であるオブジェクトの値などなどをチェック！
+
+const persons = [
+  { name: "ko-ji", age: 19, alive: true },
+  { name: "se-ji", age: 23, alive: false },
+  { name: "kanji", age: 40, alive: true }
+];
+
+describe("オブジェクトin配列", () => {
+  test("オブジェクトの型チェック", () => {
+    for (var i = 0; i < persons.length; i++) {
+      const res = persons[i];
+      expect(getType(res)).toEqual("object");
+    }
+  });
+
+  test("オブジェクトの中身の型チェック", () => {
+    for (const obj of persons) {
+      const res_name = obj["name"];
+      const res_age = obj["age"];
+      const res_alive = obj["alive"];
+      expect(getType(res_name)).toEqual("string");
+      expect(getType(res_age)).toEqual("number");
+      expect(getType(res_alive)).toEqual("boolean");
+    }
+  });
+});
+
+// オブジェクトを作る
+// そのオブジェクトのプロパティの少なくとも一つに「配列」をしまう
+// テストを書いて、値や型をチェック！
+
+describe("配列inオブジェクト", () => {
+  const obj = {
+    num_arr: [1, 2, 3],
+    str_arr: ["1", "2", "3"],
+    bool_arr: [true, false, true]
+  };
+
+  test("オブジェクトの要素の型チェック", () => {
+    const res_num = obj["num_arr"];
+    expect(getType(res_num)).toEqual("array");
+    const res_str = obj["str_arr"];
+    expect(getType(res_str)).toEqual("array");
+    const res_bool = obj["bool_arr"];
+    expect(getType(res_bool)).toEqual("array");
+  });
+
+  test("オブジェクトの要素チェック", () => {
+    const res_num = obj["num_arr"][0];
+    expect(getType(res_num)).toEqual("number");
+    const res_str = obj["str_arr"][0];
+    expect(getType(res_str)).toEqual("string");
+    const res_bool = obj["bool_arr"][0];
+    expect(getType(res_bool)).toEqual("boolean");
+  });
+});
+
+//まずは以下のコードをテストにコピペします。
+//その上で、"john" の部分を色々かえて、テストを実行してみてください。
+//すると当然ですが、テストの結果も変えないと、テストが通りませんよね。変えましょう。
+// 色々値を変えてみて、それでいてテストを通るようにしてください。
+// イメージとしては、まだ明確にはわからない filter の仕様を理解する気持ちで！
+
+describe("filter", () => {
+  const members = ["nakanishi", "jim", "john", "jona", "johin", "+++"];
+
+  // filter を使って、条件を絞り込む
+  const res = members.filter((member) => {
+    return member.match(/jo/);
+  });
+
+  it("絞り込まれているか", () => {
+    const expected = ["john", "jona", "johin"];
+    expect(res).toEqual(expected);
   });
 });
