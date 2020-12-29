@@ -1,10 +1,9 @@
+//webpackでcssのインポート可能になる
 import "./styles.css";
 
-document.getElementById("app").innerHTML = `
-<h1>Hello Vanilla!</h1>
-<div>
-  We use the same configuration as Parcel to bundle this sandbox, you can find more
-  info about Parcel 
-  <a href="https://parceljs.org" target="_blank" rel="noopener noreferrer">here</a>.
-</div>
-`;
+//ねじ込む隙間の対象を指定する
+const target = document.querySelector("#app");
+console.log(target);
+
+//その隙間にHTMLをねじ込む
+target.innerHTML = '<h2 class="red">ねじ込みました。</h2>';

@@ -238,3 +238,49 @@ describe("filter", () => {
     expect(res).toEqual(expected);
   });
 });
+
+//前回、filter() の紹介をしましたが、この関数の引数には さらに関数 を渡します。
+//関数 に 関数 を渡す。これは新しい要素です。
+//直接アロー関数を書いて渡す方法と、あらかじめ関数を定義しておいて渡す方法の二つがあります。
+// filter()に関数を渡してテストするようにかく
+
+//discribe:テストに見出しをつける
+describe("filterに関数を渡す", () => {
+  const members = ["nakanishi", "jim", "john", "jona", "johin", "+++"];
+
+  //it:テストに名前をつける
+  it("filterに関数を渡してテスト", () => {
+    const filterJoh = (arr) => {
+      return arr.match(/joh/);
+    };
+    const expected = ["john", "johin"];
+    const res = members.filter(filterJoh);
+    expect(res).toEqual(expected);
+  });
+});
+
+//動画を見て動きを確認する
+//filterにわたす関数でtrueを返す、falseを返すパターンを確認する
+//true: 配列を全て返す、false: 空配列を返す
+
+describe("filterにわたす関数の動きを確認する", () => {
+  const arr = ["a", "b", "c"];
+
+  const funcFilterTrue = (arr) => {
+    return true;
+  };
+
+  const funcFilterFalse = (arr) => {
+    return false;
+  };
+
+  it("all true", () => {
+    const res = arr.filter(funcFilterTrue);
+    expect(res).toEqual(["a", "b", "c"]);
+  });
+
+  it("all false", () => {
+    const res = arr.filter(funcFilterFalse);
+    expect(res).toEqual([]);
+  });
+});
